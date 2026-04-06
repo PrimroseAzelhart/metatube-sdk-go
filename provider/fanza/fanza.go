@@ -48,7 +48,6 @@ const (
 const (
 	baseURL                = "https://www.dmm.co.jp/"
 	videoURL               = "https://video.dmm.co.jp/"
-	// baseDigitalURL         = "https://www.dmm.co.jp/digital/" // deprecated
 	baseMonoURL            = "https://www.dmm.co.jp/mono/"
 	searchURL              = "https://www.dmm.co.jp/search/=/searchstr=%s/limit=120/sort=date/"
 	movieDigitalURL        = "https://video.dmm.co.jp/%s/content/?id=%s"
@@ -619,7 +618,6 @@ func (fz *FANZA) searchMovieNext(keyword string) (results []*model.MovieSearchRe
 
 	filter := func(url string) bool {
 		for _, prefix := range []string{
-			// baseDigitalURL,
 			baseMonoURL,
 			videoURL,
 		} {
@@ -666,7 +664,6 @@ func (fz *FANZA) searchMovie(keyword string) (results []*model.MovieSearchResult
 
 	c.OnXML(`//*[@id="list"]/li`, func(e *colly.XMLElement) {
 		homepage := e.Request.AbsoluteURL(e.ChildAttr(`.//p[@class="tmb"]/a`, "href"))
-		// if !strings.HasPrefix(homepage, baseDigitalURL) &&
 			if !strings.HasPrefix(homepage, baseMonoURL) &&
 			!strings.HasPrefix(homepage, videoURL) {
 			return // ignore other contents.
