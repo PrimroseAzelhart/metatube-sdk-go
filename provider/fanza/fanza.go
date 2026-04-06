@@ -664,7 +664,7 @@ func (fz *FANZA) searchMovie(keyword string) (results []*model.MovieSearchResult
 
 	c.OnXML(`//*[@id="list"]/li`, func(e *colly.XMLElement) {
 		homepage := e.Request.AbsoluteURL(e.ChildAttr(`.//p[@class="tmb"]/a`, "href"))
-			if !strings.HasPrefix(homepage, baseMonoURL) &&
+		if !strings.HasPrefix(homepage, baseMonoURL) &&
 			!strings.HasPrefix(homepage, videoURL) {
 			return // ignore other contents.
 		}
